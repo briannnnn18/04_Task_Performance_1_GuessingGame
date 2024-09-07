@@ -50,26 +50,34 @@ namespace _04_Task_Performance_1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string guessedWord = GuessText.Text.ToLower().Trim(); 
+           string guessedWord = GuessText.Text.ToLower().Trim(); // Getting the word from the GuessText(TextBox)
 
-            if (guessedWord == wordToGuess)
-            {
-                MessageBox.Show("Congratulations! You guessed the word!");
-                labelWord.Text = wordToGuess; //pag na complete mo yung guessing game
-            }
-            else
-            {
-                if (!wrongGuesses.Contains(guessedWord))
-                {
-                    
-                    wrongGuesses.Add(guessedWord);
-                    listBoxGuess.Items.Add(guessedWord);
-                }
-                MessageBox.Show("Incorrect guess! Try again.");//if you got it wrong this will show looping
-            }
+if (guessedWord == wordToGuess)
+{
+    // If na guess na lalabas to
+    MessageBox.Show("Congratulations! You guessed the word!");
+    labelWord.Text = wordToGuess; //Lalabas buong correct word
 
-            GuessText.Clear();
-            GuessText.Focus();  
+    //Para di na mag tuloy yung program mag guess
+    GuessText.Enabled = false;   // Disable
+    GuessWord.Enabled = false;   // Disable
+
+    // Optional: Show a game-over message
+    MessageBox.Show("Game won! You have guessed the word.");
+}
+else
+{
+    // mappunta sa list box pag mali
+    if (!wrongGuesses.Contains(guessedWord))
+    {
+        wrongGuesses.Add(guessedWord);
+        listBoxGuess.Items.Add(guessedWord);
+    }
+    MessageBox.Show("Incorrect guess! Try again.");//it will show pag mali ang guess
+}
+
+GuessText.Clear();  // Clear the TextBox for the next guess
+GuessText.Focus(); 
         }
 
         private void button1_Click_1(object sender, EventArgs e)
